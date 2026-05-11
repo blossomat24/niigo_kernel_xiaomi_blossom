@@ -126,9 +126,13 @@ jobs:
       - name: Send build artifacts to Telegram
         if: success()
         run: |
-          curl -s -F document=@out/kernel-modules.zip \
-            "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -F caption="Kernel Modules ZIP"
+          if [ -f out/kernel-modules.zip ]; then
+            curl -s -F document=@out/kernel-modules.zip \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+              -F caption="Kernel Modules ZIP"
+          else
+            echo "No kernel-modules.zip found, skipping."
+          fi
 
       - name: Notify success on Telegram
         if: success()
