@@ -158,3 +158,14 @@ jobs:
           curl -s -F document=@build.log \
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             -F caption="📄 Kernel build log"
+
+      - name: Zip and send Image.gz-dtb to Telegram
+        if: success()
+        run: |
+          if [ -f out/arch/arm64/boot/Image.gz-dtb ]; then
+            zip -j out/kernel-image.zip out/arch/arm64/boot/Image.gz-dtb
+            curl -s -F document=@out/kernel-image.zip \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+              -F caption="🗜️ Image.gz-dtb (zipped)"
+          fi
+          
