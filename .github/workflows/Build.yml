@@ -99,12 +99,6 @@ jobs:
           echo -e "\n### 🧠 CCACHE Stats:\n" >> build.log
           ccache --show-stats >> build.log
 
-      - name: Zip kernel modules
-        if: success()
-        run: |
-          find out -name '*.ko' > module_list.txt
-          zip -@ out/kernel-modules.zip < module_list.txt
-
       - name: Upload kernel image as artifact
         if: success()
         uses: actions/upload-artifact@v4
