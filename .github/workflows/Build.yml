@@ -41,8 +41,8 @@ jobs:
 
       - name: Set Kbuild prop
         run: |
-        export KBUILD_BUILD_HOST="Ubuntu"
-        export KBUILD_BUILD_USER="Jonjeexe"
+          echo "KBUILD_BUILD_HOST=Ubuntu" >> $GITHUB_ENV
+          echo "KBUILD_BUILD_USER=Jonjeexe" >> $GITHUB_ENV
         
       - name: Notify start on Telegram
         run: |
