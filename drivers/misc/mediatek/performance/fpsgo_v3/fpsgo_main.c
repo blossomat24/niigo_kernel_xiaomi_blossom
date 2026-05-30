@@ -656,10 +656,11 @@ static int __init fpsgo_init(void)
 	fpsgo_sysfs_init();
 
 	g_psNotifyWorkQueue =
-		create_singlethread_workqueue("fpsgo_notifier_wq");
+    alloc_workqueue("fpsgo_notifier_wq",
+        WQ_HIGHPRI | WQ_UNBOUND, 2);
 
 	if (g_psNotifyWorkQueue == NULL)
-		return -EFAULT;
+    return -EFAULT;
 
 	mutex_init(&notify_lock);
 
