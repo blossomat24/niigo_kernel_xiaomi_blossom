@@ -148,21 +148,21 @@
  * Battery Over Current Protect
  **************************************************/
 #if IS_ENABLED(CONFIG_MTK_BATTERY_OC_POWER_THROTTLING)
-#define MT_GPUFREQ_BATT_OC_LIMIT_FREQ			(485000)/* KHz */
+#define MT_GPUFREQ_BATT_OC_LIMIT_FREQ			(500000)/* KHz */
 #endif
 
 /**************************************************
  * Battery Percentage Protect
  **************************************************/
 #if IS_ENABLED(CONFIG_MTK_BATTERY_PERCENTAGE_POWER_THROTTLING)
-#define MT_GPUFREQ_BATT_PERCENT_LIMIT_FREQ		(485000)/* KHz */
+#define MT_GPUFREQ_BATT_PERCENT_LIMIT_FREQ		(500000)/* KHz */
 #endif
 
 /**************************************************
  * Low Battery Volume Protect
  **************************************************/
 #if IS_ENABLED(CONFIG_MTK_LOW_BATTERY_POWER_THROTTLING)
-#define MT_GPUFREQ_LOW_BATT_VOLT_LIMIT_FREQ		(485000)/* KHz */
+#define MT_GPUFREQ_LOW_BATT_VOLT_LIMIT_FREQ		(500000)/* KHz */
 #endif
 
 /**************************************************
