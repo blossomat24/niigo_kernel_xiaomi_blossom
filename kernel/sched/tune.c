@@ -14,7 +14,7 @@ bool schedtune_initialized = false;
 extern struct reciprocal_value schedtune_spc_rdiv;
 
 /* We hold schedtune boost in effect for at least this long */
-#define SCHEDTUNE_BOOST_HOLD_NS 50000000ULL
+#define SCHEDTUNE_BOOST_HOLD_NS 100000000ULL
 
 /*
  * EAS scheduler tunables for task groups.
@@ -129,7 +129,7 @@ static inline struct schedtune *parent_st(struct schedtune *st)
  */
 struct schedtune
 root_schedtune = {
-	.boost	= 0,
+	.boost	= 10,
 	.prefer_idle = 0,
 };
 
@@ -608,8 +608,8 @@ boost_write(struct cgroup_subsys_state *css, struct cftype *cft,
 {
 	struct schedtune *st = css_st(css);
 
-	if (boost < 0 || boost > 100)
-		return -EINVAL;
+	if (boost == 0)
+         boost = 1;
 
 	st->boost = boost;
 
