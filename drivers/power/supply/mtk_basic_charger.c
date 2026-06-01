@@ -186,9 +186,9 @@ static bool select_charging_current_limit(struct mtk_charger *info,
 
 	} else if (info->chr_type == POWER_SUPPLY_TYPE_USB_DCP) {
 		pdata->input_current_limit =
-			info->data.ac_charger_input_current;
+			1500000;
 		pdata->charging_current_limit =
-			info->data.ac_charger_current;
+			1500000;
 		if (info->config == DUAL_CHARGERS_IN_SERIES) {
 			pdata2->input_current_limit =
 				pdata->input_current_limit;
@@ -208,8 +208,9 @@ static bool select_charging_current_limit(struct mtk_charger *info,
 	else {
 		is_basic = true;
 		/* AICL */
-		charger_dev_run_aicl(info->chg1_dev,
-			&pdata->input_current_limit_by_aicl);
+		/* charger_dev_run_aicl(info->chg1_dev,
+			&pdata->input_current_limit_by_aicl); */
+		pdata->input_current_limit_by_aicl = -1;
 		if (info->enable_dynamic_mivr) {
 			if (pdata->input_current_limit_by_aicl >
 				info->data.max_dmivr_charger_current)
@@ -244,8 +245,8 @@ static bool select_charging_current_limit(struct mtk_charger *info,
 			chr_debug("USBIF & STAND_HOST skip current check\n");
 		else {
 			if (info->sw_jeita.sm == TEMP_T0_TO_T1) {
-				pdata->input_current_limit = 500000;
-				pdata->charging_current_limit = 540000;
+				pdata->input_current_limit = 1500000;
+				pdata->charging_current_limit = 1500000;
 			}
 		}
 	}
