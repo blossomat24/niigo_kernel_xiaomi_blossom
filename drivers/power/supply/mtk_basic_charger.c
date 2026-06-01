@@ -194,13 +194,14 @@ static bool select_charging_current_limit(struct mtk_charger *info,
 				pdata->input_current_limit;
 			pdata2->charging_current_limit = 2000000;
 		}
-	} else if (info->chr_type == POWER_SUPPLY_TYPE_USB_FLOAT) {
-    /* NONSTANDARD_CHARGER - treat as DCP for better compatibility */
-    pdata->input_current_limit =
-        info->data.ac_charger_input_current;
-    pdata->charging_current_limit =
-        info->data.ac_charger_current;
-    is_basic = true;
+    } else if (info->chr_type == POWER_SUPPLY_TYPE_USB_FLOAT) {
+		/* NONSTANDARD_CHARGER - treat as DCP for better compatibility */
+		pdata->input_current_limit =
+				info->data.ac_charger_input_current;
+		pdata->charging_current_limit =
+				info->data.ac_charger_current;
+		is_basic = true;
+	}
 
 	if (support_fast_charging(info))
 		is_basic = false;
