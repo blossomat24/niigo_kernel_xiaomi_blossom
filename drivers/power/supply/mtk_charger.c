@@ -408,7 +408,7 @@ static void mtk_charger_parse_dt(struct mtk_charger *info,
 	} else {
 		chr_err("use default USB_CHARGER_CURRENT:%d\n",
 			USB_CHARGER_CURRENT);
-		info->data.usb_charger_current = 1500000;
+		info->data.usb_charger_current = USB_CHARGER_CURRENT;
 	}
 
 	if (of_property_read_u32(np, "ac_charger_current", &val) >= 0) {
@@ -416,7 +416,7 @@ static void mtk_charger_parse_dt(struct mtk_charger *info,
 	} else {
 		chr_err("use default AC_CHARGER_CURRENT:%d\n",
 			AC_CHARGER_CURRENT);
-		info->data.ac_charger_current = 2000000;
+		info->data.ac_charger_current = AC_CHARGER_CURRENT;
 	}
 
 	if (of_property_read_u32(np, "ac_charger_input_current", &val) >= 0)
